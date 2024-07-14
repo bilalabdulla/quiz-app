@@ -13,6 +13,7 @@ export const NewQuiz = () => {
     const [optionTwo, setOptionTwo] = useState('')
     const [optionThree, setOptionThree] = useState('')
     const [correctAnswer, setCorrectAnswer] = useState('')
+    const [category, setCategory] = useState('others')
 
     const navigate = useNavigate()
 
@@ -25,7 +26,8 @@ export const NewQuiz = () => {
                 optionOne: optionOne,
                 optionTwo: optionTwo,
                 optionThree: optionThree,
-                correctAnswer: correctAnswer
+                correctAnswer: correctAnswer,
+                category: category
             })
             alert('question submitted')
             setQuestion('')
@@ -69,6 +71,18 @@ export const NewQuiz = () => {
         <input className="options-input correct-answer"
         placeholder="correct answer" required value={correctAnswer}
         onChange={(e) => setCorrectAnswer(e.target.value)} />
+        <div className="select-div">
+        <h2 className="select-title">Select category: </h2>
+        <select value={category} className="quiz-select"
+        name="category" 
+        onChange={(e) => setCategory(e.target.value)}>
+          <option value='entertainment'>Entertainment</option>
+          <option value='sports'>Sports</option>
+          <option value='geography'>Geography</option>
+          <option value='tech'>Tech</option>
+          <option value='others'>Others</option>
+        </select>
+        </div>
         <button className="new-quiz-btn" 
         onClick={onSubmitQuestion}>Submit question</button>
       </div>

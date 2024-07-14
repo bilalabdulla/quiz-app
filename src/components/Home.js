@@ -7,7 +7,7 @@ const Home = () => {
 
     const [name, setName] = useState('')
     const navigate = useNavigate()
-    const { fetchQuestions, fetchDbQuestions } = useContext(UserContext)
+    const { fetchQuestions, fetchDbQuestions, category, setCategory } = useContext(UserContext)
 
     const handleSubmit = () => {
         if(!name) {
@@ -25,7 +25,7 @@ const Home = () => {
         return null
       } else {
         fetchDbQuestions()
-        navigate('/quizlist', {state: {name: name}})
+        navigate('/quizlist', {state: {name: name, category: category}})
       }
     }
 
@@ -50,6 +50,19 @@ const Home = () => {
             <option>Easy</option>
             <option>Medium</option>
             <option>Hard</option>
+        </select>
+        </div>
+        <div className='home-select-div'>
+            <h4>Select Category</h4>
+            <p className='category-text'>Note: category only applies to user quiz</p>
+        <select className='home-select' value={category}
+        onChange={(e) => setCategory(e.target.value)}>
+            <option value='any'>Any</option>
+            <option value='tech'>Tech</option>
+            <option value='geography'>Geography</option>
+            <option value='sports'>Sports</option>
+            <option value='entertainment'>Entertainment</option>
+            <option value='others'>Others</option>
         </select>
         </div>
       <button onClick={handleSubmit} className='home-btn'>

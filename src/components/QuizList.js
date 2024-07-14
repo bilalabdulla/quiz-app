@@ -10,7 +10,7 @@ export const QuizList = () => {
     const [quizList, setQuizList] = useState([])
 
     const {
-        name, score, setScore, quizListDb, setQuizListDb
+        name, score, setScore, quizListDb, setQuizListDb, category
     } = useContext(UserContext)
 
     const location = useLocation()
@@ -32,24 +32,6 @@ export const QuizList = () => {
 
     console.log(quizListDb, 'lessgooo')
 
-    // useEffect(() => {
-    //     const getQuestionsList = async () => {
-    //         try {
-    //             const data = await getDocs(questionsListRef)
-    //             const filteredData = data.docs.map((doc) => ({
-    //                 ...doc.data(),
-    //                 id: doc.id,
-    //             }))
-    //             setQuizList(filteredData)
-    //         } catch (err) {
-    //             console.error(err)
-    //         }
-    //     }
-
-    //     getQuestionsList()
-        
-    // }, [])
-
     const handleShuffle = (options) => {
         return options.sort(() => Math.random() - 0.5)
     }
@@ -63,24 +45,13 @@ export const QuizList = () => {
         await deleteDoc(questionDoc)
     }
 
+    console.log(quizListDb, category,'here')
+
   return (
     <div className="quiz">
         <h4 className="quiz-greeting">Hey, {location.state.name}</h4>
-      {/* <div>
         {
-            quizList.map((quiz) => {
-                return <div>
-                    <h1>{quiz.question}</h1>
-                    <p>{quiz.optionOne}</p>
-                    <p>{quiz.optionTwo}</p>
-                    <p>{quiz.optionThree}</p>
-                    <p>{quiz.correctAnswer}</p>
-                </div>
-            })
-        }
-      </div> */}
-        {
-            quizListDb && <>
+            (quizListDb) && <>
                 <p className="quiz-score">Your current score is {score}</p>
                 <Question 
                 current={current}
@@ -93,7 +64,7 @@ export const QuizList = () => {
                 name={location.state.name}
                 />
             </>
-        }
+                 }
     </div>
   )
 }
