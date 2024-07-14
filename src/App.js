@@ -5,6 +5,9 @@ import Home from './components/Home';
 import { useState } from 'react';
 import UserContextProvider from './contexts/UserContext';
 import Result from './components/Result';
+import { Auth } from './components/Auth';
+import { QuizList } from './components/QuizList';
+import { NewQuiz } from './components/NewQuiz';
 
 
 const router = createBrowserRouter(
@@ -13,6 +16,9 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path='/quiz' element={<Quiz />} />
         <Route path='/result' element={<Result />} />
+        <Route path='/auth' element={<Auth />} />
+        <Route path='/quizlist' element={<QuizList />} />
+        <Route path='/newquiz' element={<NewQuiz />} />
     </Route>
   )
 )

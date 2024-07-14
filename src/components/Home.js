@@ -1,20 +1,40 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../contexts/UserContext'
+import { auth } from '../config/firebase'
 
 const Home = () => {
 
     const [name, setName] = useState('')
     const navigate = useNavigate()
-    const { fetchQuestions } = useContext(UserContext)
+    const { fetchQuestions, fetchDbQuestions } = useContext(UserContext)
 
     const handleSubmit = () => {
         if(!name) {
+            alert('enter your name')
             return null
         } else {
             fetchQuestions()
             navigate('/quiz', {state: {name:name}})
         }
+    }
+
+    const secondSubmit = () => {
+      if(!name) {
+        alert('enter your name')
+        return null
+      } else {
+        fetchDbQuestions()
+        navigate('/quizlist', {state: {name: name}})
+      }
+    }
+
+    const loginPage = () => {
+      navigate('/auth')
+    }
+
+    const directToQuiz = () => {
+      navigate('/newquiz')
     }
 
   return (
@@ -33,8 +53,12 @@ const Home = () => {
         </select>
         </div>
       <button onClick={handleSubmit} className='home-btn'>
-        Start the quiz
+        Database Quiz
       </button>
+      <button onClick={secondSubmit} className='home-btn'>
+        User Quiz
+      </button>
+      <button onClick={auth?.currentUser ? directToQuiz : loginPage} className='home-btn'>Create quiz</button>
     </div>
   )
 }
